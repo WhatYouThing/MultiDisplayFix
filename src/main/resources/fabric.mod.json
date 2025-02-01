@@ -1,0 +1,29 @@
+{
+	"schemaVersion": 1,
+	"id": "multidisplayfix",
+	"version": "${version}",
+	"name": "Multi Display Fix",
+	"description": "Prevent your cursor from being able to escape the game window.",
+	"authors": [
+		"WhatYouThing"
+	],
+	"contact": {
+		"sources": "https://github.com/WhatYouThing/MultiDisplayFix"
+	},
+	"license": "GPL-3.0",
+	"icon": "assets/multidisplayfix/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"main": [
+			"multidisplayfix.Main"
+		]
+	},
+	"mixins": [
+		"multidisplayfix.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.0",
+		"minecraft": "1.21.4",
+		"java": ">=21"
+	}
+}
