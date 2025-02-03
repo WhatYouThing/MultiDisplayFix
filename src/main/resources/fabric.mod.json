@@ -3,7 +3,7 @@
 	"id": "multidisplayfix",
 	"version": "${version}",
 	"name": "Multi Display Fix",
-	"description": "Prevent your cursor from being able to escape the game window.",
+	"description": "Prevents your cursor from being able to escape the game window.",
 	"authors": [
 		"WhatYouThing"
 	],
@@ -23,7 +23,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.16.0",
-		"minecraft": "1.21.4",
+		"minecraft": "~1.21.1",
 		"java": ">=21"
 	}
 }
