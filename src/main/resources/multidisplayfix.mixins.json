@@ -3,7 +3,7 @@
 	"package": "multidisplayfix.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"MouseMixin"
+		"MouseHandlerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

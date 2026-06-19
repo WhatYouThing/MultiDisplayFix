@@ -14,7 +14,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_CURSOR;
 import static org.lwjgl.glfw.GLFW.GLFW_CURSOR_CAPTURED;
 
 @Mixin(MouseHandler.class)
-public abstract class MouseMixin {
+public abstract class MouseHandlerMixin {
 
     @Unique
     Minecraft client = Minecraft.getInstance();
