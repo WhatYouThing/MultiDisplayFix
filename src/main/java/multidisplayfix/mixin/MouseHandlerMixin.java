@@ -1,16 +1,16 @@
 package multidisplayfix.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
 import net.minecraft.client.gui.screens.ChatScreen;
-import org.lwjgl.glfw.GLFW;
+import net.minecraft.client.gui.screens.PauseScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static org.lwjgl.glfw.GLFW.GLFW_CURSOR;
 import static org.lwjgl.glfw.GLFW.GLFW_CURSOR_CAPTURED;
 
 @Mixin(MouseHandler.class)
@@ -19,11 +19,12 @@ public abstract class MouseHandlerMixin {
     @Unique
     Minecraft client = Minecraft.getInstance();
 
-    @Inject(method = "releaseMouse", at = @At(value = "TAIL"))
-    private void onMouseMoved(CallbackInfo ci) {
-        if (client.screen instanceof ChatScreen) {
-            return;
+    @WrapOperation(method = "releaseMouse", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/platform/InputConstants;grabOrReleaseMouse(Lcom/mojang/blaze3d/platform/Window;IDD)V"))
+    private void onReleaseMouse(Window window, int cursorMode, double xpos, double ypos, Operation<Void> original) {
+        if (client.gui.screen() instanceof ChatScreen || client.gui.screen() instanceof PauseScreen) {
+            original.call(window, cursorMode, xpos, ypos);
+        } else {
+            original.call(window, GLFW_CURSOR_CAPTURED, xpos, ypos); // constant value 212996, to be removed in 26.3
         }
-        GLFW.glfwSetInputMode(client.getWindow().handle(), GLFW_CURSOR, GLFW_CURSOR_CAPTURED);
     }
 }
